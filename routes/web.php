@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployerController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,8 +13,13 @@ use App\Http\Controllers\EmployerController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::resource('/employers', EmployerController::class);
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     return view('dashboard');
+// })->name('dashboard');
+Route::get('dashboard',[EmployerController::class,'index'])->name('dashboard');
+Route::resource('employers',EmployerController::class);
+Route::post('update/{id}', [EmployerController::class,'update'])->name('update');
